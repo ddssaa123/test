@@ -61,6 +61,7 @@ print(knr.score(test_input, test_target))
 
 knr=KNeighborsRegressor()
 x=np.arange(5,45).reshape(-1,1)
+
 for n in [1, 5, 10]:
   knr.n_neighbors=n
   knr.fit(train_input, train_target)
