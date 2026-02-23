@@ -21,38 +21,55 @@ perch_weight = np.array([
 
 
 import matplotlib.pyplot as plt
+
 plt.scatter(perch_length, perch_weight)
+
 plt.xlabel('length')
+
 plt.ylabel('weight')
+
 plt.show()
 
 from sklearn.model_selection import train_test_split
+
 train_input, test_input, train_target, test_target = train_test_split(perch_length, perch_weight, random_state=42)
 
 test_array=np.array([1,2,3,4])
+
 print(test_array.shape)
 
 test_array=test_array.reshape(2,2)
+
 print(test_array.shape)
 
 train_input=train_input.reshape(-1,1)
+
 test_input=test_input.reshape(-1,1)
+
 print(train_input.shape, test_input.shape)
 
 from sklearn.neighbors import KNeighborsRegressor
+
 knr=KNeighborsRegressor()
+
 knr.fit(train_input, train_target)
+
 print(knr.score(test_input, test_target))
 
 from sklearn.metrics import mean_absolute_error
+
 test_prediction=knr.predict(test_input)
+
 mae=mean_absolute_error(test_target, test_prediction)
+
 print(mae)
 
 print(knr.score(train_input,train_target))
 
 knr.n_neighbors=3
+
 knr.fit(train_input, train_target)
+
 print(knr.score(train_input,train_target))
 
 print(knr.score(test_input, test_target))
@@ -60,17 +77,27 @@ print(knr.score(test_input, test_target))
 print(knr.score(test_input, test_target))
 
 knr=KNeighborsRegressor()
+
 x=np.arange(5,45).reshape(-1,1)
 
 for n in [1, 5, 10]:
+
   knr.n_neighbors=n
+  
   knr.fit(train_input, train_target)
+  
   prediction=knr.predict(x)
+  
   plt.scatter(train_input, train_target)
+  
   plt.plot(x, prediction)
+  
   plt.title('n_neighbors={}'.format(n))
+  
   plt.xlabel('length')
+  
   plt.ylabel('weight')
+  
   plt.show()
 
 #회기를 통해 정확히 예측하려 해도 결국 오차를 가질 수 밖에 없을 것 같은데
